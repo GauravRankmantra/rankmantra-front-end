@@ -1,0 +1,651 @@
+import React, { useState, useEffect } from "react";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
+// import ScrollAnimation from 'react-animate-on-scroll';
+import { IoLocationOutline } from "react-icons/io5";
+import { IoCallOutline } from "react-icons/io5";
+import { TfiEmail } from "react-icons/tfi";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+import { RiComputerLine } from "react-icons/ri";
+import { CiMobile3 } from "react-icons/ci";
+import { TbWorldWww } from "react-icons/tb";
+import { IoMdHappy } from "react-icons/io";
+import { IoPulseOutline } from "react-icons/io5";
+import BgImage from "../assets/bg.png";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import call from "../assets/call.jpg";
+import plan from "../assets/plan.jpg";
+import win from "../assets/win.jpg";
+
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import 'swiper/swiper-bundle.css';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+const EcommerceDevelop = () => {
+
+    const bgStyle = {
+        backgroundImage: `url(${BgImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      };
+
+    const ServicesData = [
+        {
+          id: 1,
+          title: "Mern Stack Development",
+          link: "#",
+          icon: <TbWorldWww />,
+          delay: 0.2,
+        },
+        {
+          id: 2,
+          title: "WordPress Development",
+          link: "#",
+          icon: <CiMobile3 />,
+          delay: 0.3,
+        },
+        {
+          id: 3,
+          title: "PHP Development",
+          link: "#",
+          icon: <RiComputerLine />,
+          delay: 0.4,
+        },
+        {
+          id: 4,
+          title: "Shopify Development",
+          link: "#",
+          icon: <IoMdHappy />,
+          delay: 0.5,
+        },
+        {
+          id: 5,
+          title: "Wix Development",
+          link: "#",
+          icon: <IoPulseOutline />,
+          delay: 0.6,
+        },
+      ];
+      
+      const SlideLeft = (delay) => {
+        return {
+          initial: {
+            opacity: 0,
+            x: 50,
+          },
+          animate: {
+            opacity: 1,
+            x: 0,
+            transition: {
+              duration: 0.3,
+              delay: delay,
+              ease: "easeInOut",
+            },
+          },
+        };
+      };
+
+
+  const { register, handleSubmit } = useForm();
+  
+    const googleFormUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSf3_4nAOlIG-4K60p8Mo6sBV5AK2S-uXRJh22cw0fMFZS7X2w/formResponse";
+  
+    const onSubmit = async (data, e) => {
+      const formData = new FormData();
+      formData.append("entry.2074220001", data.name);
+      formData.append("entry.171639726", data.email);
+      formData.append("entry.1770208340", data.subject);
+      formData.append("entry.26073056", data.message); 
+    
+      try {
+     
+        await fetch(googleFormUrl, {
+          method: "POST",
+          body: formData,
+          mode:"no-cors"
+        });
+    
+       
+        toast.success("Message sent successfully!");
+        e.target.reset();
+      } catch (error) {
+      
+        toast.error("An error occurred. Please try again.");
+      }
+    };
+    
+    
+  
+    useEffect(() => {
+      AOS.init({
+        duration: 1200,
+      });
+    }, []);
+  
+  
+  const [show, setShow] = useState(false);
+
+  const videoStartHandler = () => {
+    const video = document.querySelector("#video");
+    video.currentTime = 0;
+    video.load();
+    setShow(true);
+  };
+
+  const clickHandler = () => {
+    const video = document.querySelector("#video");
+    video.pause();
+    setShow(false);
+  };
+
+  return (
+    <>
+      <NavBar transparent />
+
+      <section className="w-full max-h-fit py-10 lg:px-30 overflow-hidden border-b border-orange-100 relative ">
+      <div className="relative w-full h-96 lg:h-screen">
+          <img
+            src="https://images.pexels.com/photos/29486053/pexels-photo-29486053/free-photo-of-hands-pointing-at-smartphone-with-gradient-screen.jpeg"
+            className="absolute inset-0 w-full lg:h-[95%] h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black lg:h-[95%] opacity-40 z-0"></div>
+
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-white z-10">
+            <h1 className="text-4xl md:text-6xl font-bold text-center mb-4">
+              E-commerce <span className="text-red-600">Developments</span>
+            </h1>
+            <div className="flex flex-col justify-center sm:flex-row items-center mb-10 lg:mb-0 lg:flex-row gap-10 mt-6">
+             <Link to="/contact-us">
+                 <button
+                   className="bg-red-600 text-white py-3 px-5 rounded-xl lg:text-lg text-md transition-all duration-300 transform hover:bg-red-800 hover:scale-105 hover:shadow-lg"
+                   onClick={videoStartHandler} 
+                 >
+                   SCHEDULE A CALL
+                 </button>
+                 </Link>
+            </div>
+          </div>
+        </div>
+
+
+<div className="w-full h-[80%] bg-[#ffffff] overflow-hidden mt-10">
+  <div className="flex flex-col items-center justify-center h-full px-10 secondary-font">
+   
+
+    <div
+      data-aos="zoom-in"
+      className="flex flex-col justify-center items-center gap-5 mt-5"
+    >
+      <div className="w-full">
+        <p className="text-md lg:text-lg text-gray-600 primary-font lg:mt-1 mt-2">
+        RankMantra specializes in crafting custom web applications that help businesses unlock their full potential. Our expert team focuses on creating scalable, secure, and high-performance applications tailored to your business’s specific needs.
+        </p>
+      </div>
+    </div>
+
+    <div
+      data-aos="zoom-in"
+      className="flex flex-col justify-center items-center gap-5 mt-5"
+    >
+      <div className="w-full">
+        <p className="text-md lg:text-lg text-gray-600 primary-font lg:mt-1 mt-2">
+        By designing solutions that streamline operations and enhance user experience, we help you stay ahead in a competitive market. Whether you're aiming to boost efficiency, improve workflows, or offer unique features, 
+        </p>
+      </div>
+    </div>
+
+    <p
+      data-aos="zoom-in"
+      className="text-md lg:text-lg mt-5 text-gray-600 primary-font"
+    >
+  RankMantra delivers web applications that support your goals and drive success. Trust us to deliver innovative, reliable, and user-friendly solutions that make a real impact on your business.
+    </p>
+  </div>
+</div>
+
+
+      </section>
+
+      <section className="bg-white px-10">
+      <div className="container pb-14 pt-16">
+        <h1 className="text-4xl font-bold text-left pb-10">
+          Services we provide
+        </h1>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+          {ServicesData.map((service) => (
+            <motion.div
+              variants={SlideLeft(service.delay)}
+              initial="initial"
+              whileInView={"animate"}
+              viewport={{ once: true }}
+              className="bg-[#f4f4f4] rounded-2xl flex flex-col gap-4 items-center justify-center p-4 py-7 hover:bg-white hover:scale-110 duration-300 hover:shadow-2xl"
+            >
+              <div className="text-4xl mb-4"> {service.icon}</div>
+              <h1 className="text-lg font-semibold text-center px-3">
+                {service.title}
+              </h1>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-[#f7f7f7]">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        style={bgStyle}
+        className="container py-24 md:py-48"
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          className="flex flex-col justify-center"
+        >
+          <div className="text-center space-y-4 lg:max-w-[430px] mx-auto">
+            <h1 className="text-3xl font-bold !leading-snug">
+              100+ Ecommerce are Done by using the web Development Technologies
+            </h1>
+           
+            <button
+              className="bg-red-600 text-white py-3 px-5 rounded-xl text-md transition-all duration-300 transform hover:bg-red-800 hover:scale-105 hover:shadow-lg"
+              onClick={videoStartHandler} 
+            >
+              CONTACT US
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
+
+      <div className="w-full lg:px-4 overflow-hidden bg-[#ffffff] border-b border-orange-100">
+       
+
+        <div className="flex flex-col lg:flex-row items-center lg:gap-10 secondary-font">
+          <div
+            data-aos="fade-up"
+            className="lg:w-1/2 w-full md:w-3/4 py-16 px-10 md:px-0"
+          >
+            <img className="w-full ml-2 border-4 border-red-600" src="https://images.pexels.com/photos/7621355/pexels-photo-7621355.jpeg" alt="img" />
+          </div>
+          <div className="lg:w-1/2 w-full md:w-3/4 px-10 md:p-0">
+            <div data-aos="fade-left">
+            <h1 className="lg:text-4xl text-2xl text-black primary-font font-semibold"
+            style={{color:"#7a6960"}}
+            >
+         How Our Web Application Services Transform Your Business
+         <span className="block mt-2 w-4/12 border-b-4 border-red-600"></span>
+          </h1>
+
+            </div>
+
+            <div
+              data-aos="zoom-in"
+              className="flex flex-col lg:flex-row justify-center items-center gap-5 mt-5"
+            >
+              
+              <div className="w-full">
+                
+                <p className="text-md lg:text-lg text-gray-600 primary-font lg:mt-1 mt-2">
+                You can create your website From the beginning and fit your brand correctly.
+                </p>
+              </div>
+            </div>
+
+            <div
+              data-aos="zoom-in"
+              className="flex flex-col lg:flex-row justify-center items-center gap-5 mt-5"
+            >
+              
+              <div className="w-full">
+                
+                <p className="text-md lg:text-lg text-gray-600 primary-font lg:mt-1 mt-2">
+                We take care of web design and development work from start to finish and built through creative a SEO friendly website.
+                </p>
+              </div>
+            </div>
+
+            <p
+              data-aos="zoom-in"
+              className="text-md lg:text-lg mt-5 text-gray-600 primary-font"
+            >
+             Without a strong foundation, your building is limited and so we’ll help you get the ground work in place. Through SEO campaigns we entail to use different tools and improve your website visibility.
+
+            </p>
+            <div className="flex flex-col justify-center sm:flex-row items-center mb-12 lg:mb-0 lg:flex-row gap-10 mt-10">
+            <button
+              className="bg-red-600 text-white py-3 px-5 rounded-xl text-md transition-all duration-300 transform hover:bg-red-800 hover:scale-105 hover:shadow-lg"
+              onClick={videoStartHandler} 
+            >
+              CONTACT US
+            </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div className="w-full lg:px-4 overflow-hidden bg-[#ffffff] border-b border-orange-100">
+  <div className="flex flex-col lg:flex-row-reverse items-center lg:gap-10 secondary-font">
+    <div
+      data-aos="fade-up"
+      className="lg:w-1/2 w-full md:w-3/4 py-16 px-10 md:px-4"
+    >
+      <img className="w-full border-4 border-red-600" src="https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg" alt="img" />
+    </div>
+    <div className="lg:w-1/2 w-full md:w-3/4 px-10 md:p-0">
+      <div data-aos="fade-left">
+        <h1 className="lg:text-4xl text-2xl text-black primary-font font-semibold"
+        style={{color:"#7a6960"}}
+        >
+        Responsive Web Design
+          <span className="block mt-2 w-1/2 border-b-4 border-red-600"></span>
+        </h1>
+      </div>
+
+      <div
+        data-aos="zoom-in"
+        className="flex flex-col lg:flex-row justify-center items-center gap-5 mt-5"
+      >
+        <div className="w-full">
+          <p className="text-md lg:text-lg text-gray-600 primary-font lg:mt-1 mt-2">
+          Responsive website design is an approach that makes web pages render well on different devices and window or screen sizes.
+          </p>
+        </div>
+      </div>
+
+      <div
+        data-aos="zoom-in"
+        className="flex flex-col lg:flex-row justify-center items-center gap-5 mt-5"
+      >
+        <div className="w-full">
+          <p className="text-md lg:text-lg text-gray-600 primary-font lg:mt-1 mt-2">
+          Responsive websites are the future and they allow your website adapt to different screen sizes which mean that whatever device your web visitor are using.
+          </p>
+        </div>
+      </div>
+
+      <p
+        data-aos="zoom-in"
+        className="text-md lg:text-lg mt-5 text-gray-600 primary-font"
+      >
+      We create this through free tools and you can check if your website fits and adapts to desktop, tablets, or mobile screen sizes.
+
+      </p>
+      <div className="flex flex-col justify-center sm:flex-row items-center mb-12 lg:mb-0 lg:flex-row gap-10 mt-10">
+      <button
+              className="bg-red-600 text-white py-3 px-5 rounded-xl text-md transition-all duration-300 transform hover:bg-red-800 hover:scale-105 hover:shadow-lg"
+              onClick={videoStartHandler} 
+            >
+              CONTACT US
+            </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+      <section className="pt-10 lg:pb-0 pb-10 relative">
+        <div className="absolute inset-0 bg-cover bg-center opacity-30 lg:h-[90%]" style={{ backgroundImage: 'url("https://images.pexels.com/photos/18530501/pexels-photo-18530501/free-photo-of-google-in-smartphone.jpeg")' }}></div>
+        <div className="container mx-auto px-8 relative z-10">
+          <div className="flex flex-wrap justify-center text-center lg:mb-[-20px] mb-6">
+            <div className="w-full lg:w-6/12 px-4">
+              <h2 className="lg:text-3xl text-2xl font-semibold uppercase"
+                style={{ color: "#7a6960" }}
+              >
+                3-Steps to Make your Business an Online Powerhouse
+                <span className="block mt-2 mx-auto w-20 border-b-4 border-red-600"></span>
+              </h2>
+            </div>
+          </div>
+          <div className="flex flex-wrap">
+            <div className="flex min-h-screen items-center justify-center">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 lg:w-[85%]">
+                <div className="group relative cursor-pointer flex flex-col items-center justify-center transition-shadow hover:shadow-xl hover:shadow-black/30 py-4 px-6 bg-white rounded-lg shadow-lg h-[300px]">
+                  <div className="mb-2 flex justify-center">
+                    <div className="w-32 h-32 rounded-full bg-red-100 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-105 animate-pulse">
+                      <img
+                        className="w-20 h-20 object-contain transition-transform duration-500 group-hover:rotate-12"
+                        src={call}
+                        alt="call"
+                      />
+                    </div>
+                  </div>
+
+                  <h1 className="font-dmserif lg:text-2xl text-xl font-bold text-black mb-1 text-center">SCHEDULE A CALL</h1>
+                  <p className="text-sm italic text-gray-700 text-center">
+                    Get in touch with us! You’re only a phone call away from improving your company’s exposure.
+                  </p>
+                  <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2">
+                    <button
+                      className="bg-red-600 text-white lg:py-3 px-6 text-md font-semibold rounded-full transition-all duration-300 transform hover:bg-red-800 hover:scale-110 hover:shadow-lg active:scale-95 animate-bounce"
+                      onClick={videoStartHandler}
+                    >
+                      SCHEDULE NOW
+                    </button>
+                  </div>
+                </div>
+
+
+                <div className="group relative cursor-pointer flex flex-col items-center justify-center transition-shadow hover:shadow-xl hover:shadow-black/30 py-4 px-6 mt-6 lg:mt-0 bg-white rounded-lg shadow-lg h-[300px]">
+                  <div className="mb-2 flex justify-center">
+                    <div className="w-32 h-32 rounded-full bg-red-100 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-105 animate-pulse">
+                      <img
+                        className="w-20 h-20 object-contain transition-transform duration-500 group-hover:rotate-12"
+                        src={plan}
+                        alt="plan"
+                      />
+                    </div>
+                  </div>
+
+                  <h1 className="font-dmserif lg:text-2xl text-xl font-bold text-black mb-1 text-center">GET YOUR PLAN</h1>
+
+                  <p className="text-sm italic text-gray-700 text-center">
+                    Browse through everything we have to offer and choose the option that’s right for you!
+                  </p>
+
+                  <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2">
+                    <button
+                      className="bg-red-600 text-white lg:py-3 py-2 px-6 text-md font-semibold rounded-full transition-all duration-300 transform hover:bg-red-800 hover:scale-110 hover:shadow-lg active:scale-95 animate-bounce text-center"
+                      onClick={videoStartHandler}
+                    >
+                      GET PLAN
+                    </button>
+                  </div>
+                </div>
+
+
+                <div className="group relative cursor-pointer flex flex-col items-center justify-center transition-shadow hover:shadow-xl hover:shadow-black/30 py-4 px-6 mt-6 lg:mt-0 bg-white rounded-lg shadow-lg h-[300px]">
+                  <div className="mb-2 flex justify-center">
+                    <div className="w-32 h-32 rounded-full bg-red-100 flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-105 animate-pulse">
+                      <img
+                        className="w-20 h-20 object-contain transition-transform duration-500 group-hover:rotate-12"
+                        src={win}
+                        alt="win"
+                      />
+                    </div>
+                  </div>
+
+                  <h1 className="font-dmserif lg:text-2xl text-xl font-bold text-black mb-1 text-center">WIN ONLINE</h1>
+
+                  <p className="text-sm italic text-gray-700 text-center">
+                    Take charge of all search engines and business listings with our all-in-one marketing solutions!
+                  </p>
+
+                  <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2">
+                    <button
+                      className="bg-red-600 text-white lg:py-3 px-6 text-md font-semibold rounded-full transition-all duration-300 transform hover:bg-red-800 hover:scale-110 hover:shadow-lg active:scale-95 animate-bounce"
+                      onClick={videoStartHandler}
+                    >
+                      START WINNING
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+ 
+         <div className=" text-[#7A6960] w-full max-h-fit py-16 lg:px-32 overflow-hidden border-b border-orange-100 bg-gray-100">
+         <h1 data-aos="fade-right" className="text-3xl font-semibold text-center uppercase">
+        Contact
+      </h1>
+      <div className="flex justify-center items-center mt-2">
+        <div className="bg-red-600 h-1 w-16 rounded"></div>
+      </div>
+      <p className="text-gray-700 text-center mt-7 mb-10 text-lg">
+        Have questions or need assistance? Our team is ready to support you. Reach out to us today and let’s discuss how we can boost your online presence.
+      </p>
+
+      <div className="lg:flex gap-6">
+        <div
+          data-aos="fade-up"
+          className="lg:w-[40%] px-10 py-5 shadow-xl border-t-[3px] border-b-[3px] border-orange-600 mb-7 lg:mb-0"
+        >
+          <div className="flex gap-3 mt-3 mb-12">
+            <div
+              className="rounded-full h-fit bg-orange-100 p-2"
+              style={{ color: "#EA580C", fontSize: "28px" }}
+            >
+              <IoLocationOutline />
+            </div>
+            <div>
+              <h2 className="lg:text-xl text-[#7A6960] font-semibold">Address</h2>
+              <p className="text-sm text-slate-800">Shyam Tower, Shimla Bypass Road,248171</p>
+            </div>
+          </div>
+
+          <div className="flex gap-3 mb-12">
+            <div
+              className="rounded-full h-fit bg-orange-100 p-2"
+              style={{ color: "#EA580C", fontSize: "28px" }}
+            >
+              <IoCallOutline />
+            </div>
+            <div>
+              <h2 className="lg:text-xl text-[#7A6960] font-semibold">Call Us</h2>
+              <p className="text-sm text-slate-800">+91 8979249912</p>
+            </div>
+          </div>
+
+          <div className="flex gap-5 mb-12">
+            <div
+              className="rounded-full h-fit bg-orange-100 p-2"
+              style={{ color: "#EA580C", fontSize: "28px" }}
+            >
+              <TfiEmail />
+            </div>
+            <div>
+              <h2 className="lg:text-xl text-[#7A6960] font-semibold">Email Us</h2>
+              <p className="text-sm text-slate-800">info@rankmantra.com</p>
+            </div>
+          </div>
+
+          <div className="lg:w-full lg:h-72">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14010.76256980872!2d77.22260515427726!3d28.60905606083753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390929f8421dcd3b%3A0xc98798955cbfeb6d!2sRankMantra!5e0!3m2!1sen!2sin!4v1717776828829!5m2!1sen!2sin"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+
+        <div
+          data-aos="fade-up"
+          data-aos-duration="1600"
+          className="lg:w-[60%] px-10 py-5 shadow-xl border-t-[3px] border-b-[3px] border-red-600"
+        >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="md:flex gap-6">
+              <div className="md:w-[50%]">
+                <div>
+                  <label htmlFor="name">Name</label>
+                  <input
+                    {...register("name", { required: true })}
+                    type="text"
+                    id="name"
+                    placeholder="John Doe"
+                    className="w-full h-10 px-3 my-3 rounded border border-zinc-300 focus:border focus:border-red-600 outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="md:w-[50%]">
+                <div>
+                  <label htmlFor="email">Your Email</label>
+                  <input
+                    {...register("email", { required: true })}
+                    type="email"
+                    id="email"
+                    placeholder="johndoe@gmail.com"
+                    className="w-full h-10 px-3 my-3 rounded border border-zinc-300 focus:border focus:border-red-600 outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="subject">Subject</label>
+              <input
+                {...register("subject", { required: true })}
+                type="text"
+                id="subject"
+                placeholder="Your subject"
+                className="w-full h-10 px-3 my-3 rounded border border-zinc-300 focus:border focus:border-red-600 outline-none"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message">Message</label>
+              <textarea
+                {...register("message", { required: true })}
+                id="message"
+                placeholder="Enter your message"
+                className="w-full h-60 p-3 my-3 rounded border border-zinc-300 focus:border focus:border-red-600 outline-none resize-none"
+              ></textarea>
+            </div>
+
+            <div className="flex flex-col justify-center sm:flex-row items-center mb-12 lg:mb-0 lg:flex-row gap-10 mt-10">
+            <button
+              className="bg-red-600 text-white py-3 px-5 rounded-xl text-md transition-all duration-300 transform hover:bg-red-800 hover:scale-105 hover:shadow-lg"
+              onClick={videoStartHandler} 
+            >
+              SEND MESSAGE
+            </button>
+            </div>
+          </form>
+        </div>
+      </div>
+          </div>
+    {/* </section> */}
+    
+
+      <section className="w-full max-h-fit py-16 lg:px-30 overflow-hidden border-b border-orange-100 relative mt-6">
+        <div className="absolute inset-0 bg-cover bg-center opacity-10 z-0" 
+             style={{ backgroundImage: 'url(https://images.pexels.com/photos/267401/pexels-photo-267401.jpeg)' }}>
+        </div>
+        <div className="relative z-10">
+          <Footer />
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default EcommerceDevelop;
